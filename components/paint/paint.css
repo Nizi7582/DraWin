@@ -1,0 +1,239 @@
+.paint-container {
+    background-color: #e8e8e8;
+    color: #1a1a1a;
+    border-radius: 5px;
+    margin: auto;
+    display: flex;
+    max-width: 1050px;
+    width: 100%;
+    column-gap: 10px;
+    padding: 10px;
+}
+
+.paint-container section {
+    border-radius: 7px;
+    background-color: #f5f6f7;
+}
+
+.paint-container section.tools {
+    width: 210px;
+    padding: 15px 22px 0;
+}
+
+.paint-container section.tools .row {
+    margin-bottom: 20px;
+}
+
+.paint-container section.tools .row .options {
+    list-style: none;
+    margin: 10px 0 0 5px;
+}
+
+.paint-container section.tools .row .options .option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.paint-container section.tools .row .options .option img {
+    cursor: pointer;
+}
+
+.paint-container section.tools .row .options .option:is(:hover, :focus, .active) img {
+    filter: sepia(100%) saturate(1000%) hue-rotate(625deg) brightness(150%) contrast(100%);
+}
+
+.paint-container section.tools .row .options .option :is(span, label) {
+    cursor: pointer;
+    color: #8e8e8e;
+    padding-left: 10px;
+}
+
+.paint-container section.tools .row .options .option input {
+    accent-color: #8e8e8e;
+}
+
+.paint-container section.tools .row .options .option:is(:hover, :focus, .active) :is(span, label, input),
+.paint-container section.tools .row .options .option :is(span, label, input):is(:hover, :focus, .active) {
+    color: #ee88ee;
+    accent-color: #ee88ee;
+}
+
+.paint-container section.tools .row .options .option .fill {
+    height: 14px;
+    width: 14px;
+}
+
+.paint-container section.tools .row .options .option .fill:checked,
+.paint-container section.tools .row .options .option .fill:checked~label {
+    color: #ee88ee;
+    accent-color: #ee88ee;
+    border-color: #ee88ee;
+}
+
+.paint-container section.tools .row .options .option .size {
+    width: 100%;
+    height: 5px;
+    margin-top: 10px;
+}
+
+.paint-container section.tools .row.colors .options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paint-container section.tools .row.colors .options .option {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(1) {
+    background-color: #f5f6f7;
+    border: 1px solid #8e8e8e;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(2) {
+    background-color: #1a1a1a;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(3) {
+    background-color: #ee8888;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(4) {
+    background-color: #88ee88;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(5) {
+    background-color: #ee88ee;
+}
+
+.paint-container section.tools .row.colors .options .option.selected::before,
+.paint-container section.tools .row.colors .options .option:is(:hover, :focus)::before,
+.paint-container section.tools .row.colors .options .option:last-child:has(.color:hover, .color:focus)::before {
+    content: '';
+    height: 12px;
+    width: 12px;
+    background-color: inherit;
+    border-radius: inherit;
+    border: 2px solid #f5f6f7;
+}
+
+.paint-container section.tools .row.colors .options .option:nth-child(1).selected::before,
+.paint-container section.tools .row.colors .options .option:nth-child(1):is(:hover, :focus)::before {
+    border-color: #8e8e8e;
+}
+
+.paint-container section.tools .row.colors .options .option .color {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    /* width: 100%;
+    height: 100%; */
+}
+
+.paint-container section.tools .row.buttons button {
+    cursor: pointer;
+    width: 100%;
+    color: #1a1a1a;
+    background-color: #f5f6f7;
+    border: 1px solid #1a1a1a;
+    outline: none;
+    padding: 11px 0;
+    margin-bottom: 13px;
+    border-radius: 4px;
+    font-size: .9rem;
+    transition: 400ms;
+}
+
+.paint-container section.tools .row.buttons button.clear {
+    background-color: #e8e8e8;
+}
+
+.paint-container section.tools .row.buttons button.save {
+    color: #f5f6f7;
+    background-color: #8e8e8e;
+}
+
+.paint-container section.tools .row.buttons button:is(:hover, :focus) {
+    color: #f5f6f7;
+    background-color: #1a1a1a;
+}
+
+.paint-container section.board {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+}
+
+.paint-container section.board canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.paint-container section.board .indicator {
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff1a;
+    backdrop-filter: blur(5px);
+}
+
+.paint-container section.board .indicator>div:not(.triangle) {
+    border-style: solid;
+    }
+
+.paint-container section.board .indicator .rectangle,
+.paint-container section.board .indicator .circle,
+.paint-container section.board .indicator .triangle,
+.paint-container section.board .indicator .brush,
+.paint-container section.board .indicator .eraser {
+    width: 200px;
+    height: 200px;
+}
+
+.paint-container section.board .indicator .circle,
+.paint-container section.board .indicator .brush,
+.paint-container section.board .indicator .eraser {
+    border-radius: 50%;
+}
+
+.paint-container section.board .indicator .triangle {
+    position: relative;
+}
+
+.paint-container section.board .indicator .triangle ._1,
+.paint-container section.board .indicator .triangle ._2,
+.paint-container section.board .indicator .triangle ._3 {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 7%;
+}
+
+.paint-container section.board .indicator .triangle ._1 {
+    transform: rotate(0) translate(0, 0);
+}
+
+.paint-container section.board .indicator .triangle ._2 {
+    transform: rotate(120deg) translate(-49px, 85px);
+}
+
+.paint-container section.board .indicator .triangle ._3 {
+    transform: rotate(-120deg) translate(49px, 85px);
+}
+
+.paint-container section.board .indicator .line {
+    width: 200px;
+}
