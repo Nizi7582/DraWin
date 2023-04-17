@@ -69,8 +69,9 @@
           <button class="saveLink">Post the Drawing</button>
         </div>
       </section>
-      <section class="board">
-        <canvas></canvas>
+      <section class="board cursor-pointer">
+          <canvas>
+          </canvas>
         <div class="indicator">
           <div class="rectangle"></div>
           <div class="circle"></div>
@@ -91,6 +92,7 @@
 <script>
 import axios from "axios";
 import "./paint.css";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -101,6 +103,42 @@ export default {
       errorDraw: "",
     };
   },
+  computed: {
+    ...mapGetters({
+      user: "user/getUser",
+    }),
+  },
+  methods: {
+    add_drawing(link) {
+      
+        this.link = paint_canvas.toDataURL(); // paint_canvas.toDataURL() => string utilisable en source d'image pour afficher le dessin
+
+        const formData = new FormData();
+        formData.append("token", this.user.token);
+        formData.append("link", link);
+
+        axios
+          .post("http://localhost/my-app/ScribblBack/add_drawing.php", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response.data === "Le dessin a déja été enregistré.") {
+              this.errorMail = response.data;
+              setTimeout(() => {
+                this.errorMail = "";
+              }, 3500);
+              return;
+            }
+          })
+
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+  },
+
   mounted() {
     function loadMePaint() {
       // Constants
@@ -315,36 +353,6 @@ export default {
         a.href = paint_canvas.toDataURL(); // paint_canvas.toDataURL() => string utilisable en source d'image pour afficher le dessin
         a.click();
         console.log(paint_canvas.toDataURL());
-      }
-      function paint_saveLinkIMG() {
-        const a = document.createElement("a");
-        a.href = paint_canvas.toDataURL(); // paint_canvas.toDataURL() => string utilisable en source d'image pour afficher le dessin
-        a.click();
-        add_drawing(a.href);
-      }
-      function add_drawing(link) {
-        const formData = new FormData();
-        formData.append("link", link);
-
-        axios
-          .post("http://localhost/my-app/ScribblBack/add_drawing.php", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((response) => {
-            if (response.data === "Le dessin a déja été enregistré.") {
-              this.errorMail = response.data;
-              setTimeout(() => {
-                this.errorMail = "";
-              }, 3500);
-              return;
-            }
-          })
-
-          .catch((error) => {
-            console.log(error);
-          });
       }
     }
     setTimeout(() => {
