@@ -26,7 +26,7 @@
           >
         </li>
         <li class="text-gray-300">
-          <svg
+          <svg v-if="user.online"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
@@ -41,35 +41,34 @@
             />
           </svg>
         </li>
-        <li>
-          <nuxt-link
-            class="text-lg text-gray-600 font-semibold hover:text-gray-500"
-            to="/drawings"
-            >Your Drawings</nuxt-link
-          >
-        </li>
-        <li class="text-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            class="w-4 h-4 current-fill"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-            />
-          </svg>
-        </li>
-        <li>
+        <li v-if="user.online">
           <nuxt-link
             class="text-lg text-gray-600 font-semibold hover:text-gray-500"
             to="/draw"
             >Draw</nuxt-link
           >
+        </li>
+        <li v-if="user.name === 'admin'">
+          <nuxt-link to="/event" class="flex items-center text-gray-300 space-x-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              class="w-4 h-4 current-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+            <div
+              class="text-lg text-gray-600 font-semibold hover:text-gray-500"
+              >Manage Event</div
+            >
+          </nuxt-link>
         </li>
       </ul>
       <div v-if="!user.online">
@@ -140,22 +139,15 @@
             <li class="mb-1">
               <a
                 class="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
-                >Home</a
-              >
-            </li>
-            <li class="mb-1">
-              <a
-                class="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                href="/gallery"
                 >Gallery</a
               >
             </li>
             <li class="mb-1">
               <a
                 class="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="/drawings"
-                >Drawings</a
+                href="/draw"
+                >Draw</a
               >
             </li>
           </ul>

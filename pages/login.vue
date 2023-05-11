@@ -14,11 +14,11 @@
         <div class="flex-1">
           <div class="text-center">
             <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">
-              DraWin
+              Connexion
             </h2>
 
             <p class="mt-3 text-gray-500 dark:text-gray-300">
-              Sign in to access your account
+              Entrez les informations de votre compte
             </p>
           </div>
 
@@ -70,11 +70,10 @@
 
             <p class="mt-6 text-sm text-center text-gray-400">
               Don't have an account yet?
-              <a
-                href="#"
+              <nuxt-link to="/register"
                 class="text-blue-500 focus:outline-none focus:underline hover:underline"
-                >Sign up</a
-              >.
+                >Sign up</nuxt-link
+              >
             </p>
           </div>
         </div>
